@@ -1,0 +1,26 @@
+<input type="button" class="btn btn-sm btn-outline-success" value="Submit" onclick="updatePartial('@Url.Action("UpdateDataEndpoint", "DataController")', {data: $('#dataField').val()}, '#id_of_tag_to_update')"/>
+
+---
+
+function updatePartial(url, data, id) {
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: data,
+        success: function (response) {
+            $(id).html('');
+            $(id).html(response);
+        }
+    })
+}
+
+---
+
+[HttpPost]
+        public PartialViewResult UpdateDataEndpoint(string data)
+        {
+            // Do Logic with posted data...
+
+            return PartialView("updatedPartialName", partialModelIfNeeded);
+        }
+
